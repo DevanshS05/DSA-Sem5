@@ -13,7 +13,7 @@ int main(){
 		printf("\nPlease enter the element at index %d: ",i+1);
 		scanf("%d",&arr[i]);
 	}
-	
+	/*
 	//Checking if the array is already sorted
 	if(size==0 || size==1){
 		printf("\nThe array is already sorted!");
@@ -28,20 +28,25 @@ int main(){
 		printf("\nArray is already sorted!");
 		return 0;
 	}
+	*/
+	
+	//To check the number of passes and comparisons
+	int pass=0,comp=0,swap=0;
 	
 	//Sorting the given array using bubble sort
 	for(i=0;i<size-1;i++){
 		for(j=0;j<size-i-1;j++){
+			comp++;
 			if(arr[j]>arr[j+1]){
 				int temp = arr[j];
 				arr[j] = arr[j+1];
 				arr[j+1] = temp;
-				counter++;
+				swap++;
 			}
 		}
+		pass++;
 	}
-	printf("\nThe value of i is %d",i);
-	printf("\nThe value of counter is %d",counter);
+	printf("\nThe number of passes = %d and the number of swaps = %d and the number of comparsions=%d",pass,swap,comp);
 	printf("\nThe given array after sorting is: \n");
 	for(i=0;i<size;i++) printf("%d ",arr[i]);
 	return 0;
