@@ -9,23 +9,34 @@ elements to right > pivot
 - Ultimately, we will obtain the sorted array
 
 #We are not using pointers because in C arrays are called by "reference"
+#Note : Usual time complexity is n*log(n)
+	However, quick sort has a time complexity of O(n^2) in two cases :
+	1. When the data is already sorted [ Can be prevented by randomization ]
+	2.The elements of the array are same
 */
 #include<stdio.h>
+
+int counter = 0; //Global variable which keeps track of number of swaps
+
+int randomNum(int l, int h){
+	return rand()%(h-l+1)+l;
+}
+
 void sort(int arr[], int low, int high){
-	//printf("\nThe current array is: ");
-	//int v=low;
-	//for(;v<=high;v++) printf("%d ",arr[v]);
-	//printf("with low:%d and high:%d",low,high);
 	if(low>=high) return;
 	
-	int start=low, end=high, mid=0,pivot=0,temp=0;
-	mid = (start+end)/2;
-	pivot = arr[mid];
+	int start=low, end=high, randIdx=0,pivot=0,temp=0;
+	randIdx = randomNum(start,end); //For randomization of pivot
+	temp = arr[start];
+	arr[start] = arr[randIdx];
+	arr[randIdx] = temp;
+	pivot = arr[start];
 	
 	while(start<=end){
 		while(arr[start]<pivot) start++;
 		while(arr[end]>pivot) end--;
 		if(start<=end){
+			counter++;
 			temp = arr[end];
 			arr[end] = arr[start];
 			arr[start] = temp;
@@ -55,6 +66,8 @@ int main(){
 	
 	printf("\nThe array after sorting is: ");
 	for(i=0;i<size;i++) printf("%d ",arr[i]);
+	
+	printf("\nFor an array of size %d, number of swaps is %d",size,counter);
 	
 	return 0;
 }
