@@ -54,9 +54,10 @@ class LinkedList:
         if self.head is None:
             return
         else:
-            return self.head.data
+            temp = self.head.data
             self.head = self.head.next
             self.size-=1
+            return temp
             
 
     def removeAtEnd(self):
